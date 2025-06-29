@@ -14,6 +14,17 @@ import html
 import json
 import re
 import pandas as pd
+from http.server import SimpleHTTPRequestHandler, HTTPServer
+
+# Get port from Railway environment, default to 8000 for local dev
+port = int(os.environ.get("PORT", 8000))
+
+# Start a simple HTTP server
+server_address = ('0.0.0.0', port)
+httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
+
+print(f"Serving on port {port}")
+httpd.serve_forever()
 
 # Apply nest_asyncio to allow nested event loops
 nest_asyncio.apply()
